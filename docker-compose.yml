@@ -1,0 +1,29 @@
+version: '3'
+services:
+  internship:
+    image: internship-go
+    environment:
+      - MYSQL_HOST=mysql-db 
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASS=123456789
+    ports:
+      - 9090:9090
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+  
+  mysql-db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456789
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+    ports:
+      - 7000:3306
+    
+
