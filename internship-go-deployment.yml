@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: internship-go
+  labels:
+    app: internship-go
+spec:
+  selector:
+    matchLabels:
+      app: internship-go
+  template:
+    metadata:
+      labels:
+        app: internship-go
+    spec:
+      containers:
+      - name: internship-go
+        image: omarmahmoud10/internship-go
+        ports:
+        - containerPort: 9090
+        env: 
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: host
+        - name: MYSQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: port
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: username
+        - name: MYSQL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+

@@ -1,0 +1,13 @@
+# external service for now, but we will use ingress
+apiVersion: v1
+kind: Service
+metadata:
+  name: internship-go-service
+spec:
+  selector:
+    app: internship-go
+  type: LoadBalancer
+  ports:
+  - port: 9090
+    targetPort: 9090
+    nodePort: 30001
