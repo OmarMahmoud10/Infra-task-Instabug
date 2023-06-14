@@ -14,6 +14,10 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+      - name: mysql-volume 
+        persistentVolumeClaim: 
+          claimName: mysql-pvc
       containers:
       - name: mysql
         image: mysql
