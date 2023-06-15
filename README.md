@@ -155,7 +155,7 @@ docker run -d -e MYSQL_ROOT_PASSWORD=<password> -v mysql-volume:/var/lib/mysql -
   - MYSQL_USER
   - MYSQL_PASS
 ```
-docker run -d -e MYSQL_USER=<user_name> -e MYSQL_PORT=<db_host_port> -e MYSQL_HOST=mysql-db -e MYSQL_PASS=db_password -p <go_host_port>:9090 --link mysql-db:mysql-db omarmahmoud10/internship-go
+docker run -d -e MYSQL_USER=root -e MYSQL_PORT=<db_host_port> -e MYSQL_HOST=mysql-db -e MYSQL_PASS=db_password -p <go_host_port>:9090 --link mysql-db:mysql-db omarmahmoud10/internship-go
 ```
 5. check the connection by going to `localhost:<go_host_port>/healthcheck`
 > stop the containers `docker stop <container_id>`
