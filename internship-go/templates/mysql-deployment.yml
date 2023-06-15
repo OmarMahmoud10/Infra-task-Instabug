@@ -20,6 +20,9 @@ spec:
           claimName: mysql-pvc
       containers:
       - name: mysql
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
         image: mysql
         ports:
         - containerPort: 3306
