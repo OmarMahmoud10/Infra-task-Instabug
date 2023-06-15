@@ -39,7 +39,7 @@ pipeline
             steps
             {
                 sh '''
-                docker build -f Dockerfile -t $DOCKERHUB_CREDENTIALS_USR/internship-go:$BUILD_NUMBER 
+                docker build -f Dockerfile . -t $DOCKERHUB_CREDENTIALS_USR/internship-go:$BUILD_NUMBER 
                 echo "image build successfully"
                 '''
             }
