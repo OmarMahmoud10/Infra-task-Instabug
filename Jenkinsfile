@@ -4,7 +4,7 @@ pipeline
     {
         node
         {
-            label ''
+            label 'docker-agent-docker'
         }
     }
     environment
@@ -19,28 +19,45 @@ pipeline
     {
         stage('Checkout')
         {
-            git branch: 'main', url: 'https://github.com/OmarMahmoud10/Infra-task-Instabug.git'
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/OmarMahmoud10/Infra-task-Instabug.git'
+            }
+            
         }
         stage('Docker-login')
         {
-            sh '''
-            echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-            echo "logged in successfullu"
-            '''
+            steps
+            {
+                sh '''
+                echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                echo "logged in successfullu"
+                '''
+            }
+            
         }
         stage('Build')
         {
-            sh '''
+            steps
+            {
+                sh '''
                 docker build -f Dockerfile -t $DOCKERHUB_CREDENTIALS_USR/internship-go:$BUILD_NUMBER 
                 echo "image build successfully"
-            '''
+                '''
+            }
+            
         }
         stage('PUSH')
         {
-            sh '''
-            docker push $DOCKERHUB_CREDENTIALS_USR/internship-go:$BUILD_NUMBER
-            '''
+            steps
+            {
+                sh '''
+                docker push $DOCKERHUB_CREDENTIALS_USR/internship-go:$BUILD_NUMBER
+                '''
 
+
+            }
+        
         }
     }
     post
@@ -53,7 +70,7 @@ pipeline
         }
         faliure
         {  
-        mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "foo@foomail.com";  
+            mail bcc: '', body: "<b>Pipeline build failed</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "omar.mahmoud.ahmed10@gmail.com";  
         } 
     } 
 }
