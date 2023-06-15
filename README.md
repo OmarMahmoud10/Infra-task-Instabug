@@ -176,6 +176,8 @@ helm install internship-go-release internship-go/
 
 ---
 
+screenshot for the output
+
 ![internship-go](internship-go-k8s.png)
 
 
