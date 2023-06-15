@@ -1,7 +1,7 @@
 version: '3'
 services:
   internship:
-    image: internship-go
+    image: omarmahmoud10/internship-go
     environment:
       - MYSQL_HOST=mysql-db 
       - MYSQL_PORT=3306
