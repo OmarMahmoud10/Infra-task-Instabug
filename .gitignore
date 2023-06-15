@@ -1,5 +1,5 @@
 MyKey.key 
 MyCertificate.crt 
-mysql-secret.yml
-internship-go-tls-secret.yml
+/internship-go/mysql-secret.yml
+/internship-go/internship-go-tls-secret.yml
 /mysql-volume
